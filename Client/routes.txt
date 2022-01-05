@@ -1,0 +1,9 @@
+{
+    "routes":[
+        {
+            "route": "/api/*",
+            "redirect": "/.auth/login/aad"
+        }
+    ]
+    
+  }

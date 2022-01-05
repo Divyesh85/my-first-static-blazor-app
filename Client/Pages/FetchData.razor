@@ -2,9 +2,9 @@
 @using BlazorApp.Shared 
 @inject HttpClient Http
 
-<h1>Weather forecast</h1>
+<h1>Payslip forecast</h1>
 
-<p>C# Blazor application display weather data returned by a serverless API</p>
+<p>C# Blazor application display Payslip data returned by a serverless API</p>
 
 @if (forecasts == null)
 {
@@ -15,20 +15,21 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Month</th>
+                <th>Payslip Increase</th>
+                <th>PayslipCount</th>
+                @* <th>Feeling</th> *@
             </tr>
         </thead>
         <tbody>
             @foreach (var forecast in forecasts)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    @* <td>@forecast.Date.ToShortDateString()</td> *@
+                    <td>@forecast.Date</td>
+                    <td>@forecast.PayslipIncrease</td>
+                    <td>@forecast.PayslipCount</td>
+                    @* <td>@forecast.Feeling</td> *@
                 </tr>
             }
         </tbody>
@@ -36,13 +37,13 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts = new WeatherForecast[]{};
+    private Forecast[] forecasts = new Forecast[]{};
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("/api/WeatherForecast") ?? new WeatherForecast[]{};
+            forecasts = await Http.GetFromJsonAsync<Forecast[]>("/api/PayslipCount") ?? new Forecast[]{};
         }
         catch (Exception ex)
         {
